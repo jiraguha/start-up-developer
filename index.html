@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Full stack reactive application with RSocket</title>
+    <title>Software development disciplines</title>
 
     <meta name="description" content="Quick demo about how to create a full stack reactive application with RSocket & Spring">
     <meta name="author" content="Iraguha Jean-Paul">
@@ -41,15 +41,11 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
         <section>
-            <h1>Full stack reactive application</h1>
-            <h3>with RSocket</h3>
+            <h1>Software development disciplines</h1>
+            <h3></h3>
             <p>
-                <small>Presented by <a href="https://github.com/jiraguha">Iraguha Jean-Paul</a></small>
+                <small>A personal vision presented by <a href="https://github.com/jiraguha">Iraguha Jean-Paul</a></small>
             </p>
-            <div class="center">
-                <a>@BruJUG</a>
-                <img src="lib/images/BruJUG-logo.jpeg" alt="" style="border:0;height:2em;top: 0.7em;position: relative;">
-            </div>
         </section>
 
         <section>
@@ -81,163 +77,156 @@
         <!-- Example of nested vertical slides -->
         <section>
             <section>
-                <h2>Demo HTTP vs RSocket</h2>
+                <h2>Software development is hard</h2>
                 <div>
-                    <ol>
-                        <li>Simple REST API</li>
-                        <li>Simple Rsocket server</li>
-                    </ol>
+                    <ul>
+                        <li class="fragment">Industry is moving really fast</li>
+                        <li class="fragment">Growing codes</li>
+                        <li class="fragment">Lack of quality developer</li>
+                        <li class="fragment">Software Entropy</li>
+                    </ul>
                 </div>
-
                 <h3></h3>
-                <div>
-                    <small>
-                        <ul>
-                            <li>Basic Spring reactive web with webflux</li>
-                            <li>Mongodb reactive</li>
-                            <li>Kotlin with DSL</li>
-                        </ul>
-                    </small>
+                <div class="fragment">
+                    <img alt="" src="lib/images/garbabe.jpg" style="border:0;height:10em;bottom: 0.7em;position: relative;">
                 </div>
 
             </section>
             <section id="fragment1">
-                <h4>Demo scaffold</h4>
-                <pre class="fragment"><code class="hljs" data-trim contenteditable>
-fun main(args: Array&lt;String&gt;) {
-    runApplication&lt;ColorServiceApplication&gt;(*args)
-}
+                <h4>Non-technical Discipline & Technically discipline</h4>
+                <div class="fragment">
+                    Agile & XP
+                </div>
+                <ul>
+                    <li class="fragment">Ethic & morality & promises to make & not a process or not tasks to follow</li>
+                    <li class="fragment">Attention to details</li>
+                    <li class="fragment">Take ownership and lead</li>
+                    <li class="fragment">In the DNA: Define what is our profession</li>
+                </ul>
 
-@Document
-data class Color(
-        @Id val id: String,
-        val hexCode: String,
-        val name: String
-)
-interface ColorRepo : ReactiveMongoRepository&lt;Color, String&gt;
-                </code></pre>
-                <pre class="fragment"><code class="hljs" data-trim contenteditable>
-@SpringBootApplication
-class ColorServiceApplication(val objectMapper: ObjectMapper, val colorRepo: ColorRepo) {
 
-    @EventListener(ApplicationReadyEvent::class)
-    fun injectColors() {
-        val classLoader = javaClass.classLoader
-        val path = classLoader.getResource("color.json").file
-        Mono.from(colorRepo.deleteAll())
-                .thenReturn(objectMapper.readValue&lt;List&lt;Color&gt;&gt;(File(path)))
-                .flatMapMany { colorRepo.insert(it) }
-                .subscribe { logger.info(it) }
-    }
-
-    companion object {
-        private val logger = LogManager.getLogger(this.javaClass.enclosingClass)
-    }
-}
-          </code></pre>
-
-            </section>
-            <section>
-                <h2>Useful links</h2>
-                <small>
-                    <div>
-                        <a href="https://jiraguha.github.io/rest-vs-rocket-prez/">https://jiraguha.github.io/rest-vs-rocket-prez/</a>
-                    </div>
-                    <div>
-                        <a href="https://github.com/jiraguha/color-service.git">Demo app: color-service</a>
-                    </div>
-                    <div>
-                        <a href="https://www.reactivemanifesto.org">The Reactive Manifesto</a>
-                    </div>
-                    <div>
-                        <a href="https://www.youtube.com/watch?v=WJK6chc7w3o">Simon Baslé explaining Reactor</a>
-                    </div>
-                    <div>
-                        <a href="http://rsocket.io/">rsocket.io</a>
-                    </div>
-                    <div>
-                        <a href="https://github.com/rsocket/rsocket-cli">rsocket-cli on github</a>
-                    </div>
-                    <div>
-                        <a href="https://spring.io/blog/2019/01/02/spring-tips-rsocket">Spring Tips: RSocket by Josh Long</a>
-                    </div>
-                    <div>
-                        <a href="https://www.youtube.com/watch?v=WVnAbv65uCU">Distributed Reactive Streams with RSocket, Reactor, and Spring
-                            by Stephane Maldini</a>
-                    </div>
-                </small>
-            </section>
-            <section>
-                <h2>Thanks</h2>
             </section>
         </section>
         <section>
-            <section id="fragment2">
-                <h4>Backup: REST API</h4>
-                <pre class="fragment"><code class="hljs" data-trim contenteditable>
-@Configuration
-class ColorRouter(val colorHandler: ColorHandler) {
-    @Bean
-    fun route() = router {
-        "/colors".nest {
-            GET("/", colorHandler::findAllForHttp)
-        }
-
-    }
-}
-                </code></pre>
-                <pre class="fragment"><code class="hljs" data-trim contenteditable>
-@Component
-class ColorHandler(val colorRepo: ColorRepo) {
-    fun findAllForHttp(req: ServerRequest): Mono&lt;ServerResponse&gt; {
-        return findAll()
-                .`as` { ok().json().body(it) }
-    }
-
-    fun findAll() = colorRepo.findAll()
-            .delayElements(Duration.ofMillis(50))
-}
-          </code></pre>
-            </section>
             <section id="fragment3">
-                <h4>Backup: Rsocket</h4>
-                <pre class="fragment"><code class="hljs" data-trim contenteditable>
-@Configuration
-@Component
-class ColorRSocketController(val colorHandler: ColorHandler, val objectMapper: ObjectMapper) : ApplicationListener&lt;ApplicationReadyEvent&gt;,
-        SocketAcceptor {
-                ...
-    override fun onApplicationEvent(event: ApplicationReadyEvent) {
-        logger.info("Opening the rsocket on port 8081")
-        RSocketFactory
-                .receive()
-                .acceptor(this)
-                .transport(TcpServerTransport.create(8081))
-                .start()
-                .subscribe()
-    }
-
-    companion object {
-        private val logger = LogManager.getLogger(this.javaClass.enclosingClass)
-
-    }
-}
-                </code></pre>
-                <pre class="fragment"><code class="hljs" data-trim contenteditable>
-    override fun accept(setup: ConnectionSetupPayload?, sendingSocket: RSocket?): Mono&lt;RSocket&gt; {
-        val abstractRSocket = object : AbstractRSocket() {
-            override fun requestStream(payload: Payload?): Flux&lt;Payload&gt; {
-                return colorHandler.findAll()
-                        .map { objectMapper.writeValueAsString(it) }
-                        .map { DefaultPayload.create(it) }
-            }
-        }
-        return Mono.just(abstractRSocket)
-    }
-          </code></pre>
+                <h4>Professional</h4>
+                <ul>
+                    <li>Effective & pragmatic & Critique</li>
+                    <li>Take Responsibility: <br/>
+                        <small>Providing option, no excuse, <br/>some developer will avoid to touch code to avoid take responsibility
+                        </small>
+                    </li>
+                    <li>Be a Catalyst for Change</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section id="fragment4">
+                <h4>Best practice: Good software make gain money</h4>
+                <ul>
+                    <li>Clean code: Quality vs Cost</li>
+                    <li>Clean & architecture: <br/>
+                        <small>Postpone decisions vs Procrastination</small>
+                    </li>
+                </ul>
             </section>
         </section>
 
+        <section>
+            <section id="fragmentE">
+                <h4>Solution & problem</h4>
+                <ul>
+                    <li>Simplicity</li>
+                    <li>Gradual complexity + enforced basis = possibilities</li>
+                    <li>Problem vs puzzle: functionally committed</li>
+                    <li>Polyglot <br/>
+                        <small>
+                           <br/> -multiservices <br/> -domains <br/> -progressive management of the complexity
+                        </small>
+
+                    </li>
+                </ul>
+            </section>
+        </section>
+
+        <section>
+            <section id="fragmentE2">
+                <h4>Ubiquitous Automation</h4>
+                <ul>
+                    <li>DevOps from the ground <br/>
+                        <small>
+                            <br/> -fully automated <br/> -even validation process <br/> -Infra as code
+                        </small>
+                    </li>
+                    <li>Gradual complexity + enforced basis = possibilities</li>
+                    <li>Problem vs puzzle: functionally committed</li>
+                </ul>
+            </section>
+        </section>
+
+        <section>
+            <section id="fragmentE22">
+                <h4>Visibility</h4>
+                <ul>
+                    <li>Transparency  <br/>
+                        <small>
+                            <br/> -full monitoring by design  <br/> -predictability<br/>
+                        </small>
+                    </li>
+                    <li>Keep eyes on the objectives & continuous transformation (trajectory vs target) </li>
+                    <li>Helicopter view</li>
+                </ul>
+            </section>
+        </section>
+
+        <section>
+            <section id="fragmentE223">
+                <h4>Data centric by design</h4>
+                <ul>
+                    <li>Data as asset  <br/>
+                        <small>
+                            <br/> -percolation  <br/> -feedback loop<br/>
+                        </small>
+                    </li>
+                    <li>High secured by design</li>
+                </ul>
+            </section>
+        </section>
+
+
+        <section>
+            <section id="fragmentE2233">
+                <h4>Open</h4>
+                <ul>
+                    <li>open source advocacy<br/>
+                        <small>
+                            <br/> -high visibility  <br/> -unlimited resources<br/>
+                        </small>
+                    </li>
+                    <li>Key for inspiration and innovation</li>
+                    <li>Innovation by incubation & advocacy</li>
+                </ul>
+            </section>
+        </section>
+
+        <section>
+            <section id="fragmentE22334">
+                <h4>Failure</h4>
+                <ul>
+                    <li>Ownership</li>
+                    <li>Failure fast to success</li>
+                    <li>Reversibility</li>
+                </ul>
+            </section>
+        </section>
+
+        <section>
+            <section id="fragmentE223349">
+                <h4>equilibrium</h4>
+                Architecture & Functional & Development & advocacy <br/>
+                (pure work) (passion to innovation)
+            </section>
+        </section>
     </div>
 
     <div class="line top"></div>
