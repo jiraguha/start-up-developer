@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Full stack reactive application with RSocket</title>
+
+    <meta name="description" content="Quick demo about how to create a full stack reactive application with RSocket & Spring">
+    <meta name="author" content="Iraguha Jean-Paul">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/robot-lung.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>Full stack reactive application</h1>
+            <h3>with RSocket</h3>
+            <p>
+                <small>Presented by <a href="https://github.com/jiraguha">Iraguha Jean-Paul</a></small>
+            </p>
+            <div class="center">
+                <a>@BruJUG</a>
+                <img src="lib/images/BruJUG-logo.jpeg" alt="" style="border:0;height:2em;top: 0.7em;position: relative;">
+            </div>
+        </section>
+
+        <section>
+            <section>
+                <h3>About me</h3>
+                <img width="178" data-src="lib/images/jpi.jpg" alt="Down arrow">
+                <p>
+                    <small>
+                        Software Engineer @SopraBanking working on microservice architecture, passionate about discovering new programming
+                        languages.
+                    </small>
+                </p>
+                <div>
+                    <img alt="" src="lib/images/LinkedIn_logo.png" style="border:0;height:1em;bottom: 0.7em;position: relative;">
+                    <img alt="" src="lib/images/GitHub.png" style="border:0;height:1em;bottom: 0.7em;position: relative;">
+                    <small>
+                        <a>@jiraguha</a>
+                    </small>
+                    <img alt="" src="lib/images/Twitter_Logo_Blue.png" style="border:0;height:1em;bottom: 0.7em;position: relative;">
+                    <small><a>@jpiraguha</a></small>
+                </div>
+            </section>
+            <section>
+                <h3>Physicist 💗 Physics </h3>
+                <img width="200" data-src="lib/images/elegantUniverse.jpg" alt="Down arrow">
+            </section>
+        </section>
+
+        <!-- Example of nested vertical slides -->
+        <section>
+            <section>
+                <h2>Demo HTTP vs RSocket</h2>
+                <div>
+                    <ol>
+                        <li>Simple REST API</li>
+                        <li>Simple Rsocket server</li>
+                    </ol>
+                </div>
+
+                <h3></h3>
+                <div>
+                    <small>
+                        <ul>
+                            <li>Basic Spring reactive web with webflux</li>
+                            <li>Mongodb reactive</li>
+                            <li>Kotlin with DSL</li>
+                        </ul>
+                    </small>
+                </div>
+
+            </section>
+            <section id="fragment1">
+                <h4>Demo scaffold</h4>
+                <pre class="fragment"><code class="hljs" data-trim contenteditable>
+fun main(args: Array&lt;String&gt;) {
+    runApplication&lt;ColorServiceApplication&gt;(*args)
+}
+
+@Document
+data class Color(
+        @Id val id: String,
+        val hexCode: String,
+        val name: String
+)
+interface ColorRepo : ReactiveMongoRepository&lt;Color, String&gt;
+                </code></pre>
+                <pre class="fragment"><code class="hljs" data-trim contenteditable>
+@SpringBootApplication
+class ColorServiceApplication(val objectMapper: ObjectMapper, val colorRepo: ColorRepo) {
+
+    @EventListener(ApplicationReadyEvent::class)
+    fun injectColors() {
+        val classLoader = javaClass.classLoader
+        val path = classLoader.getResource("color.json").file
+        Mono.from(colorRepo.deleteAll())
+                .thenReturn(objectMapper.readValue&lt;List&lt;Color&gt;&gt;(File(path)))
+                .flatMapMany { colorRepo.insert(it) }
+                .subscribe { logger.info(it) }
+    }
+
+    companion object {
+        private val logger = LogManager.getLogger(this.javaClass.enclosingClass)
+    }
+}
+          </code></pre>
+
+            </section>
+            <section>
+                <h2>Useful links</h2>
+                <small>
+                    <div>
+                        <a href="https://jiraguha.github.io/rest-vs-rocket-prez/">https://jiraguha.github.io/rest-vs-rocket-prez/</a>
+                    </div>
+                    <div>
+                        <a href="https://github.com/jiraguha/color-service.git">Demo app: color-service</a>
+                    </div>
+                    <div>
+                        <a href="https://www.reactivemanifesto.org">The Reactive Manifesto</a>
+                    </div>
+                    <div>
+                        <a href="https://www.youtube.com/watch?v=WJK6chc7w3o">Simon Baslé explaining Reactor</a>
+                    </div>
+                    <div>
+                        <a href="http://rsocket.io/">rsocket.io</a>
+                    </div>
+                    <div>
+                        <a href="https://github.com/rsocket/rsocket-cli">rsocket-cli on github</a>
+                    </div>
+                    <div>
+                        <a href="https://spring.io/blog/2019/01/02/spring-tips-rsocket">Spring Tips: RSocket by Josh Long</a>
+                    </div>
+                    <div>
+                        <a href="https://www.youtube.com/watch?v=WVnAbv65uCU">Distributed Reactive Streams with RSocket, Reactor, and Spring
+                            by Stephane Maldini</a>
+                    </div>
+                </small>
+            </section>
+            <section>
+                <h2>Thanks</h2>
+            </section>
+        </section>
+        <section>
+            <section id="fragment2">
+                <h4>Backup: REST API</h4>
+                <pre class="fragment"><code class="hljs" data-trim contenteditable>
+@Configuration
+class ColorRouter(val colorHandler: ColorHandler) {
+    @Bean
+    fun route() = router {
+        "/colors".nest {
+            GET("/", colorHandler::findAllForHttp)
+        }
+
+    }
+}
+                </code></pre>
+                <pre class="fragment"><code class="hljs" data-trim contenteditable>
+@Component
+class ColorHandler(val colorRepo: ColorRepo) {
+    fun findAllForHttp(req: ServerRequest): Mono&lt;ServerResponse&gt; {
+        return findAll()
+                .`as` { ok().json().body(it) }
+    }
+
+    fun findAll() = colorRepo.findAll()
+            .delayElements(Duration.ofMillis(50))
+}
+          </code></pre>
+            </section>
+            <section id="fragment3">
+                <h4>Backup: Rsocket</h4>
+                <pre class="fragment"><code class="hljs" data-trim contenteditable>
+@Configuration
+@Component
+class ColorRSocketController(val colorHandler: ColorHandler, val objectMapper: ObjectMapper) : ApplicationListener&lt;ApplicationReadyEvent&gt;,
+        SocketAcceptor {
+                ...
+    override fun onApplicationEvent(event: ApplicationReadyEvent) {
+        logger.info("Opening the rsocket on port 8081")
+        RSocketFactory
+                .receive()
+                .acceptor(this)
+                .transport(TcpServerTransport.create(8081))
+                .start()
+                .subscribe()
+    }
+
+    companion object {
+        private val logger = LogManager.getLogger(this.javaClass.enclosingClass)
+
+    }
+}
+                </code></pre>
+                <pre class="fragment"><code class="hljs" data-trim contenteditable>
+    override fun accept(setup: ConnectionSetupPayload?, sendingSocket: RSocket?): Mono&lt;RSocket&gt; {
+        val abstractRSocket = object : AbstractRSocket() {
+            override fun requestStream(payload: Payload?): Flux&lt;Payload&gt; {
+                return colorHandler.findAll()
+                        .map { objectMapper.writeValueAsString(it) }
+                        .map { DefaultPayload.create(it) }
+            }
+        }
+        return Mono.just(abstractRSocket)
+    }
+          </code></pre>
+            </section>
+        </section>
+
+    </div>
+
+    <div class="line top"></div>
+    <div class="line bottom"></div>
+    <div class="line left"></div>
+    <div class="line right"></div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        margin: 0.2,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        transitionSpeed: 'fast',
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+            {
+                src: 'lib/js/classList.js', condition: function () {
+                    return !document.body.classList;
+                }
+            },
+            {
+                src: 'plugin/markdown/marked.js', condition: function () {
+                    return !!document.querySelector('[data-markdown]');
+                }
+            },
+            {
+                src: 'plugin/markdown/markdown.js', condition: function () {
+                    return !!document.querySelector('[data-markdown]');
+                }
+            },
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            },
+            {src: 'plugin/search/search.js', async: true},
+            {src: 'plugin/zoom-js/zoom.js', async: true},
+            {src: 'plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', "UA-24132749-1");
+</script>
+
+</body>
+</html>
