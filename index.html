@@ -1,252 +1,254 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-
-    <title>Software development disciplines</title>
-
-    <meta name="description" content="Quick demo about how to create a full stack reactive application with RSocket & Spring">
-    <meta name="author" content="Iraguha Jean-Paul">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/robot-lung.css" id="theme">
-
-    <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="lib/css/zenburn.css">
-
-    <!-- Printing and PDF exports -->
-    <script>
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
-        document.getElementsByTagName('head')[0].appendChild(link);
-    </script>
-
-    <!--[if lt IE 9]>
-    <script src="lib/js/html5shiv.js"></script>
-    <![endif]-->
+  <meta charset="utf-8">
+  <title>Software development disciplines</title>
+  <meta name="description"
+        content="Quick demo about how to create a full stack reactive application with RSocket & Spring">
+  <meta name="author" content="Iraguha Jean-Paul">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/robot-lung.css" id="theme">
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css'
+        : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->
 </head>
-
 <body>
-
 <div class="reveal">
-
-    <!-- Any section element inside of this container is displayed as a slide -->
-    <div class="slides">
+  <!-- Any section element inside of this container is displayed as a slide -->
+  <div class="slides">
+    <section>
+      <h1>Upy Platform</h1>
+      <h3 style="font-size: 20px">Overview</h3>
+      <p>
+        <small>Presented by <a href="https://github.com/jiraguha">Iraguha Jean-Paul</a></small>
+      </p>
+      <div class="center">
+        <a>@</a>
+        <img src="lib/images/logo-upy.png" alt=""
+             style="border:0;height:2em;top: 0.7em;position: relative; box-shadow: unset">
+        <a>py</a>
+      </div>
+    </section>
+    <section>
       <section>
-        <h1>Development</h1>
-        <h3 style="font-size: 20px">Vision & strategy</h3>
-        <p>
-          <small>Presented by <a href="https://github.com/jiraguha">Iraguha Jean-Paul</a></small>
-        </p>
-        <div class="center">
-          <a>@</a>
-          <img src="lib/images/logo-upy.png" alt="" style="border:0;height:2em;top: 0.7em;position: relative; box-shadow: unset">
-          <a>py</a>
+        <h1 style="color: #ff5460">Vision</h1>
+        <ul>
+          <li class="fragment">Go faster</li>
+          <li class="fragment">Safer</li>
+          <li class="fragment">stronger</li>
+          <li class="fragment">@low cost</li>
+          <li class="fragment">With an emphasis on the customer</li>
+        </ul>
+      </section>
+      <section>
+        <h3>But wait</h3>
+        <div>Is it so easy?</div>
+        <div>What are the drawbacks?</div>
+      </section>
+      <section>
+        <h2>Software development is hard</h2>
+        <div>
+          <ul>
+            <li class="fragment">Software Entropy or Software erosion</li>
+            <li class="fragment">Fragility</li>
+            <li class="fragment">Industry is moving really fast</li>
+          </ul>
+        </div>
+        <h3></h3>
+        <div class="fragment">
+          <img alt="" src="lib/images/garbabe.jpg"
+               style="border:0;height:10em;bottom: 0.7em;position: relative;">
+        </div>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1 style="color: #ff5460">Culture</h1>
+      </section>
+      <section>
+        <h1 >DevOps</h1>
+        <q>
+          “Organizational and cultural movement that aims to increase value delivery <strong>velocity</strong>, improve service <strong>reliability</strong>, and build shared <strong>ownership</strong> among stakeholders"
+        </q>
+      </section>
+    </section>
+    <section>
+      <section><h1 style="color: #ff5460">The platform</h1></section>
+      <section>
+        <h1 style="color: #ff5460">EKS</h1>
+        <div class="fragment">
+          <img alt="" src="lib/images/eks.jpg"
+               style="border:0;height:10em;bottom: 0.7em;position: relative;">
+        </div>
+        <div>
+          <ul>
+            <li class="fragment">AWS manage our control plane - SLA</li>
+            <li class="fragment">Good VPC isolation</li>
+            <li class="fragment">Good interoperability AWS services like fargate</li>
+          </ul>
         </div>
       </section>
       <section>
-            <section>
-                <h1 style="color: #ff5460" >Vision</h1>
-              <ul>
-                <li class="fragment">Go faster</li>
-                <li class="fragment">Safer</li>
-                <li class="fragment">stronger</li>
-                <li class="fragment">@low cost</li>
-                <li class="fragment">With an emphasis on the customer</li>
-              </ul>
-            </section>
-            <section>
-                <h3>The presentation is done!</h3>
-                <div>Thanks</div>
-            </section>
-            <section>
-              <h3>But wait</h3>
-              <div>Is it so easy?</div>
-              <div>What are the drawbacks?</div>
-            </section>
-            <section>
-              <h2>Software development is hard</h2>
-              <div>
-                  <ul>
-                    <li class="fragment">Software Entropy or Software erosion</li>
-                    <li class="fragment">Growing codes</li>
-                    <li class="fragment">Industry is moving really fast</li>
-                    <li class="fragment">Lack of quality developer</li>
-                  </ul>
-              </div>
-              <h3></h3>
-              <div class="fragment">
-                  <img alt="" src="lib/images/garbabe.jpg" style="border:0;height:10em;bottom: 0.7em;position: relative;">
-              </div>
-          </section>
-          <section>
-            <h3>My role</h3>
-            <ul class="fragment">
-              <li>Give Ypy the ability to be <a style="color: #ff5460">fast</a>, <a style="color: #ff5460">safe</a> and <a style="color: #ff5460">strong</a></li>
-              <li>While fighting <a style="color: #ff5460">Software erosion</a></li>
-            </ul>
-            <p class="fragment">
-              How?
-            </p>
-          </section>
-          <section id="fragment1">
-            <h1>Discipline</h1>
-            <ul>
-                <li class="fragment">Non-technical</li>
-                <li class="fragment">Technical</li>
-            </ul>
-        </section>
-        </section>
-        <section>
-          <section id="fragment1">
-            <h1 style="color: #ff5460">Culture</h1>
-        </section>
-        </section>
-        <section>
-          <section>
-            <h1 style="color: #ff5460">business mission</h1>
-          </section>
-          <section>
-            <h3>Driven by customer needs</h3>
-            <p>
-              "Customer as our feedback loop"
-            </p>
-            <ul>
-              <li class="fragment">
-                Stay close to our product owner
-              </li>
-              <li class="fragment">
-                Get customer metrics
-              </li>
-            </ul>
-            <p style="font-weight: bold ; color: #ff5460" class="fragment">
-              Customers should be our superpower.
-            </p>
-          </section>
-          <section>
-            <h4>Controling cost and complexity</h4>
-            <p>
-              "Managed vs self-managed"
-            </p>
-            <div>
-              <img alt="" src="lib/images/Cloud_Native_Platform.png" style="border:0;height:18.5em;bottom: 0.7em;position: relative;">
-          </div>
-          </section>
-          <section>
-            <h4>Shift in mentality</h4>
-            <p>
-              "Software is a value, not a cost. Our responsibility is increase its performance on delivering value"
-            </p>
-          </section>
-          <section>
-            <h4>Data-driven & Observability monitoring</h4>
-            <p class="fragment">
-              "Data as continuous improvement fuel"
-            </p>
-            <h6 class="fragment" >Always "data ready"</h6>
-      
-            <ul>
-              <li class="fragment">
-                Stream customer data 
-              </li>
-              <li class="fragment">
-                Stream system data
-              </li>
-            </ul>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h1>Technically</h1>
-            <ul>
-              <li class="fragment">GDPR</li>
-              <li class="fragment">Fraud Detection</li>
-              <li class="fragment">Information System Security</li>
-              <li class="fragment">Business Continuity</li>
-              <li class="fragment">Disaster Recovery</li>
-            </ul>
-          </section>
-          <section>
-            <h4>Information System Security</h4>
-            <ul>
-              <li class="fragment">Lock your pc</li>
-              <li class="fragment">Authenticate yourself via 2-factor</li>
-            </ul>
-          </section>
-        </section>
-    </div>
+        <h1 >Autoscaler!</h1>
+        <div class="fragment">
+          <img alt="" src="lib/images/autoscaler.png"
+               style="border:0;height:18em;bottom: 0.7em;position: relative;">
+        </div>
+      </section>
+      <section>
+        <h3 style="color: #ff5460">Stack</h3>
+        <img alt="" src="lib/images/stack.png"
+             style="border:0;height:20em;bottom: 0.7em;position: relative;">
+      </section>
+      <section>
+        <h1 >Cluster with IaC</h1>
+        <div class="fragment">
+          <img alt="" src="lib/images/terraform.png"
+               style="border:0;height:2em;bottom: 0.7em;position: relative;">
+        </div>
+        <div>
+          <ul>
+            <li class="fragment">Tests</li>
+            <li class="fragment">Ops</li>
+            <li class="fragment">Dev</li>
+            <li class="fragment">Prod</li>
+          </ul>
+        </div>
+      </section>
+      <section>
+        <h1 >Argo</h1>
+        <div class="fragment">
+          <img alt="" src="lib/images/argo.png"
+               style="border:0;height:10em;bottom: 0.7em;position: relative;">
+        </div>
+        <div>
+          <ul>
+            <li class="fragment">CD</li>
+            <li class="fragment">Workflow</li>
+            <li class="fragment">Events</li>
+          </ul>
+        </div>
+      </section>
 
-    <div class="line top"></div>
-    <div class="line bottom"></div>
-    <div class="line left"></div>
-    <div class="line right"></div>
+      <section>
+        <h1 >Disaster Recovery with Verelo</h1>
+        <div class="fragment">
+          <img alt="" src="lib/images/verelo.png"
+               style="border:0;height:10em;bottom: 0.7em;position: relative;">
+        </div>
 
+      </section>
+      <section>
+        <h1 >Observability</h1>
+        <div>
+          <img alt="" src="lib/images/wave.png"
+               style="border:0;height:10em;bottom: 0.7em;position: relative;">
+        </div>
+
+      </section>
+      <section>
+        <h3 >Environment segregation</h3>
+        <div class="fragment">
+          <img alt="" src="lib/images/orgranization.png"
+               style="border:0;height:10em;bottom: 0.7em;position: relative;">
+        </div>
+        <div>
+          <ul>
+            <li class="fragment">User - Dev</li>
+            <li class="fragment">Tests</li>
+            <li class="fragment">Ops</li>
+            <li class="fragment">Dev</li>
+            <li class="fragment">Prod</li>
+          </ul>
+        </div>
+      </section>
+      <section>
+        <h1 >CLI</h1>
+
+        <q>One CLI to ruls them all</q>
+
+        <div class="fragment">
+          <img alt="" src="lib/images/cli.png"
+               style="border:0;height:10em;bottom: 0.7em;position: relative;">
+        </div>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1 style="color: #ff5460">Demo</h1>
+    </section>
+  </div>
+  <div class="line top"></div>
+  <div class="line bottom"></div>
+  <div class="line left"></div>
+  <div class="line right"></div>
 </div>
-
 <script src="lib/js/head.min.js"></script>
 <script src="js/reveal.js"></script>
-
 <script>
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    margin: 0.2,
 
-    // More info https://github.com/hakimel/reveal.js#configuration
-    Reveal.initialize({
-        controls: true,
-        progress: true,
-        history: true,
-        center: true,
-        margin: 0.2,
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+    transitionSpeed: 'fast',
 
-        transition: 'slide', // none/fade/slide/convex/concave/zoom
-        transitionSpeed: 'fast',
-
-        // More info https://github.com/hakimel/reveal.js#dependencies
-        dependencies: [
-            {
-                src: 'lib/js/classList.js', condition: function () {
-                    return !document.body.classList;
-                }
-            },
-            {
-                src: 'plugin/markdown/marked.js', condition: function () {
-                    return !!document.querySelector('[data-markdown]');
-                }
-            },
-            {
-                src: 'plugin/markdown/markdown.js', condition: function () {
-                    return !!document.querySelector('[data-markdown]');
-                }
-            },
-            {
-                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
-                    hljs.initHighlightingOnLoad();
-                }
-            },
-            {src: 'plugin/search/search.js', async: true},
-            {src: 'plugin/zoom-js/zoom.js', async: true},
-            {src: 'plugin/notes/notes.js', async: true}
-        ]
-    });
-
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      {
+        src: 'lib/js/classList.js', condition: function () {
+          return !document.body.classList;
+        }
+      },
+      {
+        src: 'plugin/markdown/marked.js', condition: function () {
+          return !!document.querySelector('[data-markdown]');
+        }
+      },
+      {
+        src: 'plugin/markdown/markdown.js', condition: function () {
+          return !!document.querySelector('[data-markdown]');
+        }
+      },
+      {
+        src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+          hljs.initHighlightingOnLoad();
+        }
+      },
+      {src: 'plugin/search/search.js', async: true},
+      {src: 'plugin/zoom-js/zoom.js', async: true},
+      {src: 'plugin/notes/notes.js', async: true}
+    ]
+  });
 </script>
-
 <script>
-    window.dataLayer = window.dataLayer || [];
+  window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-        dataLayer.push(arguments);
-    }
+  function gtag() {
+    dataLayer.push(arguments);
+  }
 
-    gtag('js', new Date());
-    gtag('config', "UA-24132749-1");
+  gtag('js', new Date());
+  gtag('config', "UA-24132749-1");
 </script>
-
 </body>
 </html>
