@@ -1,0 +1,94 @@
+
+/* ------------------------------------------------------------ *\
+    Fonts
+\* ------------------------------------------------------------ */
+@font-face {
+    font-family: 'Branding';
+    src: url("Branding-BoldItalic.woff2") format("woff2"), url("Branding-BoldItalic.woff") format("woff");
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap; }
+@font-face {
+    font-family: 'Branding';
+    src: url("Branding-BlackItalic.woff2") format("woff2"), url("Branding-BlackItalic.woff") format("woff");
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap; }
+@font-face {
+    font-family: 'Branding';
+    src: url("Branding-Light.woff2") format("woff2"), url("Branding-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap; }
+@font-face {
+    font-family: 'Branding SemilightItalic';
+    src: url("Branding-SemilightItalic.woff2") format("woff2"), url("Branding-SemilightItalic.woff") format("woff");
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap; }
+@font-face {
+    font-family: 'Branding Semilight';
+    src: url("Branding-Semilight.woff2") format("woff2"), url("Branding-Semilight.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap; }
+@font-face {
+    font-family: 'Branding';
+    src: url("Branding-MediumItalic.woff2") format("woff2"), url("Branding-MediumItalic.woff") format("woff");
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap; }
+@font-face {
+    font-family: 'Branding';
+    src: url("Branding-Semibold.woff2") format("woff2"), url("Branding-Semibold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap; }
+@font-face {
+    font-family: 'Branding';
+    src: url("Branding-Medium.woff2") format("woff2"), url("Branding-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap; }
+@font-face {
+    font-family: 'Branding';
+    src: url("Branding-Thin.woff2") format("woff2"), url("Branding-Thin.woff") format("woff");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap; }
+@font-face {
+    font-family: 'Branding';
+    src: url("Branding-LightItalic.woff2") format("woff2"), url("Branding-LightItalic.woff") format("woff");
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap; }
+@font-face {
+    font-family: 'Branding';
+    src: url("Branding-Black.woff2") format("woff2"), url("Branding-Black.woff") format("woff");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap; }
+@font-face {
+    font-family: 'Branding';
+    src: url("Branding-Bold.woff2") format("woff2"), url("Branding-Bold.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap; }
+@font-face {
+    font-family: 'Branding';
+    src: url("Branding-SemiboldItalic.woff2") format("woff2"), url("Branding-SemiboldItalic.woff") format("woff");
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap; }
+@font-face {
+    font-family: 'Branding';
+    src: url("Branding-ThinItalic.woff2") format("woff2"), url("Branding-ThinItalic.woff") format("woff");
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap; }
+@font-face {
+    font-family: 'AvenirBook';
+    src: url("AvenirBook.woff2") format("woff2"), url("AvenirBook.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; }
